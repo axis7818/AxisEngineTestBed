@@ -50,11 +50,9 @@ namespace TestGame.TestObjects
             Body = new Body(parameters) { Owner = this };
         }
 
-        public override void UpdateThis(GameTime t)
+        protected override void UpdateThis(GameTime t)
         {
             Body.AddInternalForce(new Vector2(force * Input.GetAxis("LeftRight"), force * Input.GetAxis("UpDown")));
-
-            base.UpdateThis(t);
         }
     }
 }

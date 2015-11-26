@@ -12,7 +12,6 @@ namespace TestGame.Worlds.FirstTest.Layers
 {
     public class MainLayer : Layer
     {
-        WorldObject TestObject;
         Sprite CenterMarker;
         InputManager Input;
 
@@ -29,21 +28,16 @@ namespace TestGame.Worlds.FirstTest.Layers
             Input.AddBinding("TimeDown", Keys.PageDown);
             Input.AddBinding("Pause", Keys.Escape);
 
-            // create the test object
-            TestObject = new AnimTesObject();
-            TestObject.Position = DrawManager.ScreenCenter;
-
             // create the center marker
             CenterMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
             CenterMarker.Center();
             CenterMarker.Scale = new Vector2(0.1f, 0.1f);
-            CenterMarker.Position = DrawManager.ScreenCenter;
+            CenterMarker.Position = DrawManager.ScreenCenter.PointToVector2();
             CenterMarker.DrawOrder = 0;
             CenterMarker.Color = Color.Red;
 
             // add world objects
             Add(Input);
-            Add(TestObject);
             Add(CenterMarker);
         }
 

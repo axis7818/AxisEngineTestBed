@@ -1,4 +1,5 @@
-﻿using AxisEngine;
+﻿using System;
+using AxisEngine;
 using AxisEngine.Physics;
 using AxisEngine.Visuals;
 using Microsoft.Xna.Framework;
@@ -15,7 +16,7 @@ namespace TestGame.Worlds.FirstTest
     {
         Layer mainLayer;
 
-        public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, ContentManager content, params Layer[] layers) : base(graphics, graphicsDevice, content)
+        public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, ContentManager content, params Layer[] layers) : base(graphics, graphicsDevice)
         {
             SetUpManagers(graphicsDevice);
             SetUpLayers();
@@ -32,6 +33,16 @@ namespace TestGame.Worlds.FirstTest
         {
             mainLayer = new MainLayer(CollisionManagers["CollisionMgr"], DrawManagers["DrawMgr"], TimeManagers["TimeMgr"]);
             AddLayer(mainLayer);
+        }
+
+        protected override void Load()
+        {
+            // do nothing right now
+        }
+
+        protected override void Unload()
+        {
+            // do nothing right now
         }
     }
 }

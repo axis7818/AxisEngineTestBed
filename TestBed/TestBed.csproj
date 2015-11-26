@@ -46,7 +46,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestObjects\AnimTestObject.cs" />
     <Compile Include="TestObjects\InputMoveTestObject.cs" />
     <Compile Include="Worlds\FirstTest\BodySpriteAnimTestWorld.cs" />
     <Compile Include="Worlds\FirstTest\Layers\MainLayer.cs" />
@@ -54,7 +53,7 @@
   <ItemGroup>
     <Reference Include="AxisEngine, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AxisEngine\AxisEngine\bin\Release\AxisEngine.dll</HintPath>
+      <HintPath>..\..\AxisEngine\AxisEngine\bin\Debug\AxisEngine.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
       <HintPath>$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\WindowsGL\OpenTK.dll</HintPath>
