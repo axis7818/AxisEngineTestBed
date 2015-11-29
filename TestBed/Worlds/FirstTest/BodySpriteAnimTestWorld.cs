@@ -5,9 +5,9 @@ using AxisEngine.Visuals;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using TestGame.Worlds.FirstTest.Layers;
+using TestBed.Worlds.FirstTest.Layers;
 
-namespace TestGame.Worlds.FirstTest
+namespace TestBed.Worlds.FirstTest
 {
     /* 
     This world tests some of the earlier features of AxisEngine such as positioning, scaling, managers, draw order, etc. 
@@ -16,17 +16,10 @@ namespace TestGame.Worlds.FirstTest
     {
         Layer mainLayer;
 
-        public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, ContentManager content, params Layer[] layers) : base(graphics, graphicsDevice)
+        public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, params Layer[] layers) 
+            : base(graphics, graphicsDevice)
         {
-            SetUpManagers(graphicsDevice);
-            SetUpLayers();
-        }
 
-        private void SetUpManagers(GraphicsDevice graphicsDevice)
-        {
-            CollisionManagers["CollisionMgr"] = new CollisionManager();
-            DrawManagers["DrawMgr"] = new DrawManager(graphicsDevice);
-            TimeManagers["TimeMgr"] = new TimeManager();
         }
 
         private void SetUpLayers()
@@ -35,14 +28,22 @@ namespace TestGame.Worlds.FirstTest
             AddLayer(mainLayer);
         }
 
+        protected override void SetUpManagers(GraphicsDevice graphicsDevice)
+        {
+            CollisionManagers["CollisionMgr"] = new CollisionManager();
+            DrawManagers["DrawMgr"] = new DrawManager(graphicsDevice);
+            TimeManagers["TimeMgr"] = new TimeManager();
+        }
+
         protected override void Load()
         {
-            // do nothing right now
+            SetUpLayers();
         }
 
         protected override void Unload()
         {
-            // do nothing right now
+            mainLayer = null;
+            Layers.Clear();
         }
     }
 }

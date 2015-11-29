@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using TestBed.TestObjects;
 
-namespace TestGame.Worlds.FirstTest.Layers
+namespace TestBed.Worlds.FirstTest.Layers
 {
     public class MainLayer : Layer
     {

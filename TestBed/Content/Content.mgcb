@@ -35,3 +35,9 @@
 /processorParam:TextureFormat=Color
 /build:images/SmileyWalk.png
 
+#begin fonts/testFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:fonts/testFont.spritefont
+

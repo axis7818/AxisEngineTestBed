@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using AxisEngine;
 using AxisEngine.Debug;
-using TestGame.Worlds.FirstTest;
+using TestBed.Worlds.FirstTest;
+using TestBed.Worlds.SplashScreen;
 using System;
 using TestBed.Content;
 
@@ -15,7 +17,8 @@ namespace TestGame
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private BodySpriteAnimTestWorld testWorld;
+        private WorldManager _worldManager;
+        
         private bool paused = false;
 
         public Game1()
@@ -51,7 +54,11 @@ namespace TestGame
         /// </summary>
         protected override void Initialize()
         {
-            testWorld = new BodySpriteAnimTestWorld(graphics, GraphicsDevice, Content);
+            BodySpriteAnimTestWorld testWorld = new BodySpriteAnimTestWorld(graphics, GraphicsDevice);
+            SplashScreen splashScreen = new SplashScreen(graphics, GraphicsDevice);
+
+            _worldManager = new WorldManager(splashScreen);
+            _worldManager.AddWorld("testWorld", testWorld);
 
             base.Initialize();
         }
@@ -87,9 +94,10 @@ namespace TestGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && !Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+#if DEBUG
             Grid.Visible = Keyboard.GetState().IsKeyDown(Keys.NumPad0);
-
-            testWorld.Update(gameTime);
+#endif
+            _worldManager.CurrentWorld.Update(gameTime);
 
             base.Update(gameTime);  
         }
@@ -100,13 +108,12 @@ namespace TestGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(testWorld.BackgroundColor);
+            GraphicsDevice.Clear(_worldManager.CurrentWorld.BackgroundColor);
 
 #if DEBUG
             Grid.Draw(GraphicsDevice);
 #endif
-
-            testWorld.Draw(gameTime);
+            _worldManager.CurrentWorld.Draw(gameTime);
 
             base.Draw(gameTime);
         }

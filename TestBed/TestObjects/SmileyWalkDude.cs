@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using AxisEngine;
+using AxisEngine.UserInput;
+using AxisEngine.Physics;
 using AxisEngine.Visuals;
 using TestBed.Content;
 
@@ -13,16 +16,72 @@ namespace TestBed.TestObjects
 {
     public class SmileyWalkDude : WorldObject
     {
-        Animator anim;
-        Texture2D smileyWalkTexture;
+        // assets
+        private Texture2D _smileyWalkTexture;
+
+        // components
+        private Animator anim;
+        private Body body;
+        private InputManager input;
+
+        // parameters
+        private float _walkSpeed = 200;
 
         public SmileyWalkDude() : base()
         {
+            // get the animation texture
+            _smileyWalkTexture = ContentLoader.Content.Load<Texture2D>(Assets.SMILEY_WALK);
+
             // make the animator
-            smileyWalkTexture = ContentLoader.Content.Load<Texture2D>(Assets.SMILEY_WALK);
-            Animation defaultAnimation = new Animation(smileyWalkTexture, 500, 4, 4);
-            anim = new Animator(defaultAnimation);
+            Animation standing = new Animation(_smileyWalkTexture, 300, 4, 4, 2);
+            Animation walking = new Animation(_smileyWalkTexture, 300, 4, 4, 16, true);
+            anim = new Animator(standing);
+            anim.AddAnimation(AnimationNames.WALKING, walking);
+            anim.Scale = new Vector2(2.0f, 2.0f);
             AddComponent(anim);
+
+            // make the body
+            body = new Body(new BodyParams(10, false, 300, 0.5f));
+            AddComponent(body);
+
+            // make the input
+            input = new InputManager();
+            input.AddAxis(InputNames.X_AXIS, Keys.D, Keys.A);
+            input.AddAxis(InputNames.Y_AXIS, Keys.S, Keys.W);
+            AddComponent(input);
+        }
+
+        public void Walk(Vector2 direction)
+        {
+            if(direction.LengthSquared() > 0)
+            {
+                direction.Normalize();
+                body.AddInternalForce(_walkSpeed * direction);
+            }
+        }
+
+        protected override void UpdateThis(GameTime t)
+        {
+            Vector2 walk = new Vector2(input.GetAxis(InputNames.X_AXIS), 
+                                       input.GetAxis(InputNames.Y_AXIS));
+
+            Walk(walk);
+            if (body.Velocity.LengthSquared() <= 0.1f)
+                anim.SetCurrentAnimation(AnimationNames.STANDING);
+            else
+                anim.SetCurrentAnimation(AnimationNames.WALKING);
+        }
+
+        private static class AnimationNames
+        {
+            public const string STANDING = Animator.DEFAULT;
+            public const string WALKING = "WALKING";
+        }
+
+        private static class InputNames
+        {
+            public const string X_AXIS = "X_AXIS";
+            public const string Y_AXIS = "Y_AXIS";
         }
     }
 }

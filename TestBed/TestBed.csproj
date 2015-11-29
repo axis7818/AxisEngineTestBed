@@ -51,6 +51,8 @@
     <Compile Include="TestObjects\SmileyWalkDude.cs" />
     <Compile Include="Worlds\FirstTest\BodySpriteAnimTestWorld.cs" />
     <Compile Include="Worlds\FirstTest\Layers\MainLayer.cs" />
+    <Compile Include="Worlds\SplashScreen\Layers\LogoLayer.cs" />
+    <Compile Include="Worlds\SplashScreen\SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AxisEngine, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
@@ -75,6 +77,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <!-- Specify the search path explicitly so the ResolveAssemblyReferences task picks the right ones -->
   <Target Name="BeforeResolveReferences">
     <CreateProperty Value="$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows;$(AssemblySearchPaths)">
