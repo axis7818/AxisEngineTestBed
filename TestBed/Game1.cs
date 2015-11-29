@@ -26,11 +26,7 @@ namespace TestGame
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            Window.Position = new Point(1000, 100);
-
-#if DEBUG
-            Log.ShowWindow();
-#endif
+            Window.Position = new Point(100, 100);
 
             Content.RootDirectory = "Content";
             ContentLoader.Content = Content;
