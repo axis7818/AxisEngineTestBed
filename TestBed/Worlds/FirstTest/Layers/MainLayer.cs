@@ -62,7 +62,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             Add(smiley);
         }
 
-        public override void UpdateThis(GameTime t)
+        protected override void UpdateThis(GameTime t)
         {
             if (Input.GetBindingDown(PAUSE))
             {

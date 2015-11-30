@@ -4,6 +4,7 @@ using AxisEngine;
 using AxisEngine.Physics;
 using AxisEngine.Visuals;
 using TestBed.Content;
+using System;
 
 namespace TestBed.Worlds.SplashScreen.Layers
 {
@@ -15,6 +16,11 @@ namespace TestBed.Worlds.SplashScreen.Layers
             : base(coll, draw, time, worldObjects)
         {
             SetUpWorldObjects();
+        }
+
+        protected override void UpdateThis(GameTime t)
+        {
+            
         }
 
         private void SetUpWorldObjects()
