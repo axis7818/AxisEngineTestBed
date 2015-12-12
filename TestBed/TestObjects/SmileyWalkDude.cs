@@ -25,7 +25,7 @@ namespace TestBed.TestObjects
         private InputManager input;
 
         // parameters
-        private float _walkSpeed = 200;
+        private float _walkSpeed = 10;
 
         public SmileyWalkDude() : base()
         {
@@ -41,7 +41,8 @@ namespace TestBed.TestObjects
             AddComponent(anim);
 
             // make the body
-            body = new Body(new BodyParams(10, false, 300, 0.5f));
+            body = new Body();
+            body.Resistance = 0.9f;
             AddComponent(body);
 
             // make the input
@@ -56,7 +57,7 @@ namespace TestBed.TestObjects
             if(direction.LengthSquared() > 0)
             {
                 direction.Normalize();
-                body.AddInternalForce(_walkSpeed * direction);
+                body.Move(_walkSpeed * direction);
             }
         }
 

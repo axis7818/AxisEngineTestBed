@@ -16,9 +16,6 @@ namespace TestGame.TestObjects
         private Sprite Star;
         private Body Body;
 
-        // variables
-        private float force = 10.0f;
-
         public InputMoveTestObject()
         {
             AddInput();
@@ -46,13 +43,12 @@ namespace TestGame.TestObjects
 
         private void AddBody()
         {
-            BodyParams parameters = new BodyParams(1, false, 300, 0.5f);
-            Body = new Body(parameters) { Owner = this };
+            Body = new Body() { Owner = this };
         }
 
         protected override void UpdateThis(GameTime t)
         {
-            Body.AddInternalForce(new Vector2(force * Input.GetAxis("LeftRight"), force * Input.GetAxis("UpDown")));
+            
         }
     }
 }
