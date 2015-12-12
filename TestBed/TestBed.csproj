@@ -52,6 +52,7 @@
     <Compile Include="Worlds\FirstTest\BodySpriteAnimTestWorld.cs" />
     <Compile Include="Worlds\FirstTest\Layers\MainLayer.cs" />
     <Compile Include="Worlds\SplashScreen\Layers\LogoLayer.cs" />
+    <Compile Include="Worlds\SplashScreen\LogoBillboard.cs" />
     <Compile Include="Worlds\SplashScreen\SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>

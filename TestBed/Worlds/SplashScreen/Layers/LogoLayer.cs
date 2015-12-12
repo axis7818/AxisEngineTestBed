@@ -10,26 +10,15 @@ namespace TestBed.Worlds.SplashScreen.Layers
 {
     public class LogoLayer : Layer
     {
-        TextSprite logo;
-
         public LogoLayer(CollisionManager coll, DrawManager draw, TimeManager time, params WorldObject[] worldObjects) 
             : base(coll, draw, time, worldObjects)
         {
-            SetUpWorldObjects();
+            Add(new LogoBillboard());
         }
 
         protected override void UpdateThis(GameTime t)
         {
             
-        }
-
-        private void SetUpWorldObjects()
-        {
-            // add the logo
-            SpriteFont font = ContentLoader.Content.Load<SpriteFont>(Assets.TEST_SPRITEFONT);
-            logo = new TextSprite(font, "AXIS ENGINE TEST GAME", new Color(51, 204, 51));
-            logo.Position = new Vector2(100, 100);
-            Add(logo);
         }
     }
 }

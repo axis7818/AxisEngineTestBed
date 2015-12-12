@@ -48,7 +48,7 @@ namespace TestBed.Worlds.SplashScreen
             Layers.Clear();
         }
 
-        private class ManagerNames
+        private struct ManagerNames
         {
             public const string COLLISION_MGR = "CollisionMgr";
             public const string DRAW_MGR = "DrawMgr";
