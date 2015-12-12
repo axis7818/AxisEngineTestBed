@@ -54,7 +54,7 @@ namespace TestGame
             SplashScreen splashScreen = new SplashScreen(graphics, GraphicsDevice);
 
             _worldManager = new WorldManager(splashScreen);
-            _worldManager.AddWorld("testWorld", testWorld);
+            _worldManager.AddWorld(testWorld);
 
             base.Initialize();
         }

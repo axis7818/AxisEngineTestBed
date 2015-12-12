@@ -17,7 +17,7 @@ namespace TestBed.Worlds.FirstTest
         Layer mainLayer;
 
         public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, params Layer[] layers) 
-            : base(graphics, graphicsDevice)
+            : base(WorldNames.BODY_SPRITE_ANIM_TEST_WORLD, graphics, graphicsDevice)
         {
 
         }

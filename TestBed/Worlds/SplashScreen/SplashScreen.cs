@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using AxisEngine;
 using AxisEngine.Physics;
 using AxisEngine.Visuals;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using TestBed.Worlds.SplashScreen.Layers;
 
 namespace TestBed.Worlds.SplashScreen
 {
     public class SplashScreen : World
     {
-        Layer LogoLayer;
+        private LogoLayer _logoLayer;
 
         public SplashScreen(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
-            : base(graphics, graphicsDevice)
+            : base(WorldNames.SPLASH_SCREEN, graphics, graphicsDevice)
         {
             BackgroundColor = Color.Black;
         }
@@ -31,10 +27,11 @@ namespace TestBed.Worlds.SplashScreen
 
         private void SetUpLayers()
         {
-            LogoLayer = new LogoLayer(CollisionManagers[ManagerNames.COLLISION_MGR],
+            _logoLayer = new LogoLayer(CollisionManagers[ManagerNames.COLLISION_MGR],
                                       DrawManagers[ManagerNames.DRAW_MGR],
                                       TimeManagers[ManagerNames.TIME_MGR]);
-            AddLayer(LogoLayer);
+            _logoLayer.Billboard.Finished += HandleWorldEnd;
+            AddLayer(_logoLayer);
         }
 
         protected override void Load()
@@ -44,8 +41,12 @@ namespace TestBed.Worlds.SplashScreen
 
         protected override void Unload()
         {
-            LogoLayer = null;
-            Layers.Clear();
+            _logoLayer = null;
+        }
+
+        private void HandleWorldEnd(object sender, EventArgs args)
+        {
+            End(WorldNames.BODY_SPRITE_ANIM_TEST_WORLD);
         }
 
         private struct ManagerNames

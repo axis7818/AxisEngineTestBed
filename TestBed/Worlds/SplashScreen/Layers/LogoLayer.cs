@@ -10,10 +10,13 @@ namespace TestBed.Worlds.SplashScreen.Layers
 {
     public class LogoLayer : Layer
     {
+        public LogoBillboard Billboard;
+
         public LogoLayer(CollisionManager coll, DrawManager draw, TimeManager time, params WorldObject[] worldObjects) 
             : base(coll, draw, time, worldObjects)
         {
-            Add(new LogoBillboard());
+            Billboard = new LogoBillboard();
+            Add(Billboard);
         }
 
         protected override void UpdateThis(GameTime t)

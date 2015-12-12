@@ -54,6 +54,7 @@
     <Compile Include="Worlds\SplashScreen\Layers\LogoLayer.cs" />
     <Compile Include="Worlds\SplashScreen\LogoBillboard.cs" />
     <Compile Include="Worlds\SplashScreen\SplashScreen.cs" />
+    <Compile Include="Worlds\WorldNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="AxisEngine, Version=3.4.0.456, Culture=neutral, processorArchitecture=MSIL">
