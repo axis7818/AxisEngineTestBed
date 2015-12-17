@@ -20,6 +20,7 @@ namespace TestBed.Worlds.FirstTest.Layers
         private bool _spritesCentered = true;
 
         Sprite CenterMarker;
+        BoxCollider centerCollider;
         Sprite ScreenSizeMarker;
         InputManager Input;
         SmileyWalkDude smiley;
@@ -44,6 +45,11 @@ namespace TestBed.Worlds.FirstTest.Layers
             CenterMarker.Position = DrawManager.ScreenCenter.ToVector2();
             CenterMarker.Color = Color.Red;
 
+            // create the center collider
+            centerCollider = new BoxCollider(new Point(20, 20));
+            centerCollider.Position = DrawManager.ScreenCenter.ToVector2();
+            centerCollider.Center();
+
             // create the screen size marker
             ScreenSizeMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
             ScreenSizeMarker.Center();
@@ -58,6 +64,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             // add world objects
             Add(Input);
             Add(CenterMarker);
+            Add(centerCollider);
             Add(ScreenSizeMarker);
             Add(smiley);
         }

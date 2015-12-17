@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using AxisEngine;
+using AxisEngine.AxisDebug;
 using AxisEngine.UserInput;
 using AxisEngine.Physics;
 using AxisEngine.Visuals;
@@ -16,6 +13,8 @@ namespace TestBed.TestObjects
 {
     public class SmileyWalkDude : WorldObject
     {
+        private string _collidedMessage = "Not Collided!";
+
         // assets
         private Texture2D _smileyWalkTexture;
 
@@ -23,6 +22,7 @@ namespace TestBed.TestObjects
         private Animator anim;
         private Body body;
         private InputManager input;
+        private BoxCollider collider;
 
         // parameters
         private float _walkSpeed = 10;
@@ -37,13 +37,16 @@ namespace TestBed.TestObjects
             Animation walking = new Animation(_smileyWalkTexture, 300, 4, 4, 16, true);
             anim = new Animator(standing);
             anim.AddAnimation(AnimationNames.WALKING, walking);
-            anim.Scale = new Vector2(2.0f, 2.0f);
             AddComponent(anim);
 
             // make the body
             body = new Body();
             body.Resistance = 0.9f;
             AddComponent(body);
+
+            // make the collider
+            collider = new BoxCollider(new Point(anim.Width, anim.Height));
+            AddComponent(collider);
 
             // make the input
             input = new InputManager();
@@ -71,6 +74,20 @@ namespace TestBed.TestObjects
                 anim.SetCurrentAnimation(AnimationNames.STANDING);
             else
                 anim.SetCurrentAnimation(AnimationNames.WALKING);
+
+            Log.WriteLine(_collidedMessage);
+        }
+
+        private void UpdateMessage(object sender, CollisionEventArgs args)
+        {
+            if (args.IsColliding)
+            {
+                _collidedMessage = "Colliding!";
+            }
+            else
+            {
+                _collidedMessage = "Not Colliding!";
+            }
         }
 
         private static class AnimationNames

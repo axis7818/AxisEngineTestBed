@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using AxisEngine;
-using AxisEngine.Debug;
+using AxisEngine.AxisDebug;
 using TestBed.Worlds.FirstTest;
 using TestBed.Worlds.SplashScreen;
 using System;
@@ -104,12 +104,17 @@ namespace TestGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            if (paused)
+                return;
+
             GraphicsDevice.Clear(_worldManager.CurrentWorld.BackgroundColor);
+
+            _worldManager.CurrentWorld.Draw(gameTime);
 
 #if DEBUG
             Grid.Draw(GraphicsDevice);
+            _worldManager.CurrentWorld.DrawWireFrames = true;
 #endif
-            _worldManager.CurrentWorld.Draw(gameTime);
 
             base.Draw(gameTime);
         }
