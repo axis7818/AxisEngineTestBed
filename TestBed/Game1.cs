@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using AxisEngine;
 using AxisEngine.AxisDebug;
 using TestBed.Worlds.FirstTest;
 using TestBed.Worlds.SplashScreen;
-using System;
 using TestBed.Content;
 
 namespace TestGame
@@ -32,15 +32,15 @@ namespace TestGame
             ContentLoader.Content = Content;
         }
 
-        protected override void OnActivated(object sender, EventArgs args)
-        {
-            paused = false;
-        }
+        //protected override void OnActivated(object sender, EventArgs args)
+        //{
+        //    paused = false;
+        //}
 
-        protected override void OnDeactivated(object sender, EventArgs args)
-        {
-            paused = true;
-        }
+        //protected override void OnDeactivated(object sender, EventArgs args)
+        //{
+        //    paused = true;
+        //}
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -55,6 +55,8 @@ namespace TestGame
 
             _worldManager = new WorldManager(splashScreen);
             _worldManager.AddWorld(testWorld);
+
+            Grid.Visible = true;
 
             base.Initialize();
         }
@@ -110,10 +112,11 @@ namespace TestGame
             GraphicsDevice.Clear(_worldManager.CurrentWorld.BackgroundColor);
 
             _worldManager.CurrentWorld.Draw(gameTime);
+            _worldManager.CurrentWorld.DrawWireFrames();
 
 #if DEBUG
             Grid.Draw(GraphicsDevice);
-            _worldManager.CurrentWorld.DrawWireFrames = true;
+            _worldManager.CurrentWorld.DrawWireFrames();
 #endif
 
             base.Draw(gameTime);

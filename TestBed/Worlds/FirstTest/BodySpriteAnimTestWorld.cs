@@ -38,6 +38,10 @@ namespace TestBed.Worlds.FirstTest
         protected override void Load()
         {
             SetUpLayers();
+            foreach(CollisionManager cm in CollisionManagers.Values)
+            {
+                cm.SetWireFrames(GraphicsDevice);
+            }
         }
 
         protected override void Unload()

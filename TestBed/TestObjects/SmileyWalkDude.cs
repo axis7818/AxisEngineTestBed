@@ -13,8 +13,6 @@ namespace TestBed.TestObjects
 {
     public class SmileyWalkDude : WorldObject
     {
-        private string _collidedMessage = "Not Collided!";
-
         // assets
         private Texture2D _smileyWalkTexture;
 
@@ -47,6 +45,8 @@ namespace TestBed.TestObjects
             // make the collider
             collider = new BoxCollider(new Point(anim.Width, anim.Height));
             AddComponent(collider);
+            collider.CollisionStart += UpdateMessage;
+            collider.CollisionEnd += UpdateMessage;
 
             // make the input
             input = new InputManager();
@@ -74,19 +74,17 @@ namespace TestBed.TestObjects
                 anim.SetCurrentAnimation(AnimationNames.STANDING);
             else
                 anim.SetCurrentAnimation(AnimationNames.WALKING);
-
-            Log.WriteLine(_collidedMessage);
         }
 
         private void UpdateMessage(object sender, CollisionEventArgs args)
         {
             if (args.IsColliding)
             {
-                _collidedMessage = "Colliding!";
+                Log.WriteLine("Colliding!");
             }
             else
             {
-                _collidedMessage = "Not Colliding!";
+                Log.WriteLine("No Colliding!");
             }
         }
 

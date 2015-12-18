@@ -24,6 +24,7 @@ namespace TestBed.Worlds.FirstTest.Layers
         Sprite ScreenSizeMarker;
         InputManager Input;
         SmileyWalkDude smiley;
+        InstructionText instructions;
 
         public MainLayer(CollisionManager collisionMgr, DrawManager drawMgr, TimeManager timeMgr, params WorldObject[] worldObjects) 
             : base(collisionMgr, drawMgr, timeMgr, worldObjects)
@@ -59,7 +60,12 @@ namespace TestBed.Worlds.FirstTest.Layers
 
             // create smiley
             smiley = new SmileyWalkDude();
-            smiley.Position = DrawManager.ScreenCenter.ToVector2();
+            smiley.Position = DrawManager.ScreenCenter.ToVector2() / 2;
+
+            // create the instruction text
+            instructions = new InstructionText("Move the Character off of the screen to continue.");
+            instructions.Position = new Vector2(200, 50);
+            instructions.DrawOrder = 1;
 
             // add world objects
             Add(Input);
@@ -67,6 +73,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             Add(centerCollider);
             Add(ScreenSizeMarker);
             Add(smiley);
+            Add(instructions);
         }
 
         protected override void UpdateThis(GameTime t)
