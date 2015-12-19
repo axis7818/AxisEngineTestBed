@@ -41,6 +41,7 @@ namespace TestBed.Worlds.SplashScreen
 
         protected override void Unload()
         {
+            _logoLayer.Billboard.Finished -= HandleWorldEnd;
             _logoLayer = null;
         }
 

@@ -25,11 +25,17 @@ namespace TestBed.Worlds.FirstTest.Layers
         InputManager Input;
         SmileyWalkDude smiley;
         InstructionText instructions;
+        Corral outerBounds;
 
         public MainLayer(CollisionManager collisionMgr, DrawManager drawMgr, TimeManager timeMgr, params WorldObject[] worldObjects) 
             : base(collisionMgr, drawMgr, timeMgr, worldObjects)
         {
             SetUpWorldObjects();
+        }
+
+        public Corral OuterBounds
+        {
+            get { return outerBounds; }
         }
 
         private void SetUpWorldObjects()
@@ -38,6 +44,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             Input = new InputManager();
             Input.AddBinding(PAUSE, Keys.Escape);
             Input.AddBinding(TOGGLE_OFFSET, Keys.T);
+            Add(Input);
 
             // create the center marker
             CenterMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
@@ -45,11 +52,13 @@ namespace TestBed.Worlds.FirstTest.Layers
             CenterMarker.Scale = new Vector2(0.1f, 0.1f);
             CenterMarker.Position = DrawManager.ScreenCenter.ToVector2();
             CenterMarker.Color = Color.Red;
+            Add(CenterMarker);
 
             // create the center collider
             centerCollider = new BoxCollider(new Point(20, 20));
             centerCollider.Position = DrawManager.ScreenCenter.ToVector2();
             centerCollider.Center();
+            Add(centerCollider);
 
             // create the screen size marker
             ScreenSizeMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
@@ -57,23 +66,24 @@ namespace TestBed.Worlds.FirstTest.Layers
             ScreenSizeMarker.Scale = new Vector2(0.1f, 0.1f);
             ScreenSizeMarker.Position = DrawManager.ScreenSize.ToVector2();
             ScreenSizeMarker.Color = Color.Red;
+            Add(ScreenSizeMarker);
 
             // create smiley
             smiley = new SmileyWalkDude();
             smiley.Position = DrawManager.ScreenCenter.ToVector2() / 2;
+            Add(smiley);
 
             // create the instruction text
             instructions = new InstructionText("Move the Character off of the screen to continue.");
             instructions.Position = new Vector2(200, 50);
             instructions.DrawOrder = 1;
-
-            // add world objects
-            Add(Input);
-            Add(CenterMarker);
-            Add(centerCollider);
-            Add(ScreenSizeMarker);
-            Add(smiley);
             Add(instructions);
+
+            // create the outerBounds
+            Point size = new Point(DrawManager.ScreenSize.X - 10, DrawManager.ScreenSize.Y - 10);
+            outerBounds = new Corral(size, smiley);
+            outerBounds.Position = new Vector2(5, 5);
+            Add(outerBounds);
         }
 
         protected override void UpdateThis(GameTime t)

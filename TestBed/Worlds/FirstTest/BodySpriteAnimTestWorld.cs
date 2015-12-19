@@ -14,7 +14,7 @@ namespace TestBed.Worlds.FirstTest
     */
     public class BodySpriteAnimTestWorld : World
     {
-        Layer mainLayer;
+        MainLayer mainLayer;
 
         public BodySpriteAnimTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice, params Layer[] layers) 
             : base(WorldNames.BODY_SPRITE_ANIM_TEST_WORLD, graphics, graphicsDevice)
@@ -42,12 +42,19 @@ namespace TestBed.Worlds.FirstTest
             {
                 cm.SetWireFrames(GraphicsDevice);
             }
+            mainLayer.OuterBounds.Exited += HandleWorldEnd;
         }
-
+        
         protected override void Unload()
         {
+            mainLayer.OuterBounds.Exited -= HandleWorldEnd;
             mainLayer = null;
             Layers.Clear();
+        }
+
+        private void HandleWorldEnd(object sender, EventArgs args)
+        {
+            Quit();
         }
     }
 }

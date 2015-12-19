@@ -32,15 +32,20 @@ namespace TestGame
             ContentLoader.Content = Content;
         }
 
-        //protected override void OnActivated(object sender, EventArgs args)
-        //{
-        //    paused = false;
-        //}
+        protected override void OnActivated(object sender, EventArgs args)
+        {
+            paused = false;
+        }
 
-        //protected override void OnDeactivated(object sender, EventArgs args)
-        //{
-        //    paused = true;
-        //}
+        protected override void OnDeactivated(object sender, EventArgs args)
+        {
+            paused = true;
+        }
+
+        private void QuitEventHandler(object sender, EventArgs args)
+        {
+            Exit();
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -54,6 +59,7 @@ namespace TestGame
             SplashScreen splashScreen = new SplashScreen(graphics, GraphicsDevice);
 
             _worldManager = new WorldManager(splashScreen);
+            _worldManager.ReadyToQuit += QuitEventHandler;
             _worldManager.AddWorld(testWorld);
 
             Grid.Visible = true;
@@ -88,9 +94,6 @@ namespace TestGame
         {
             if (paused)
                 return;
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed && !Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
 #if DEBUG
             Grid.Visible = Keyboard.GetState().IsKeyDown(Keys.NumPad0);
