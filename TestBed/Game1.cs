@@ -63,6 +63,7 @@ namespace TestGame
             _worldManager.AddWorld(testWorld);
 
             Grid.Visible = true;
+            WireFrames.GraphicsDevice = GraphicsDevice;
 
             base.Initialize();
         }
@@ -115,11 +116,9 @@ namespace TestGame
             GraphicsDevice.Clear(_worldManager.CurrentWorld.BackgroundColor);
 
             _worldManager.CurrentWorld.Draw(gameTime);
-            _worldManager.CurrentWorld.DrawWireFrames();
 
 #if DEBUG
             Grid.Draw(GraphicsDevice);
-            _worldManager.CurrentWorld.DrawWireFrames();
 #endif
 
             base.Draw(gameTime);

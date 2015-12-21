@@ -43,7 +43,8 @@ namespace TestBed.TestObjects
             AddComponent(body);
 
             // make the collider
-            collider = new BoxCollider(new Point(anim.Width, anim.Height));
+            collider = new BoxCollider(new Point(anim.Width * 5, anim.Height * 5));
+            collider.WireFrame = WireFrames.BoxWireFrame(collider.Bounds);
             AddComponent(collider);
             collider.CollisionStart += UpdateMessage;
             collider.CollisionEnd += UpdateMessage;

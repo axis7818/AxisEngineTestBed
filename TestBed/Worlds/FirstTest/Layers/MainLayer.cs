@@ -1,5 +1,6 @@
 ﻿using System;
 using AxisEngine;
+using AxisEngine.AxisDebug;
 using AxisEngine.Physics;
 using AxisEngine.UserInput;
 using AxisEngine.Visuals;
@@ -20,7 +21,8 @@ namespace TestBed.Worlds.FirstTest.Layers
         private bool _spritesCentered = true;
 
         Sprite CenterMarker;
-        BoxCollider centerCollider;
+        CircleCollider centerCircleCollider;
+        BoxCollider centerBoxCollider;
         Sprite ScreenSizeMarker;
         InputManager Input;
         SmileyWalkDude smiley;
@@ -31,6 +33,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             : base(collisionMgr, drawMgr, timeMgr, worldObjects)
         {
             SetUpWorldObjects();
+            drawMgr.DrawWireFrames(collisionMgr);
         }
 
         public Corral OuterBounds
@@ -54,11 +57,16 @@ namespace TestBed.Worlds.FirstTest.Layers
             CenterMarker.Color = Color.Red;
             Add(CenterMarker);
 
-            // create the center collider
-            centerCollider = new BoxCollider(new Point(20, 20));
-            centerCollider.Position = DrawManager.ScreenCenter.ToVector2();
-            centerCollider.Center();
-            Add(centerCollider);
+            // create the center colliders
+            centerCircleCollider = new CircleCollider(100);
+            centerCircleCollider.WireFrame = WireFrames.CircleWireFrame(centerCircleCollider.Bounds);
+            centerCircleCollider.Position = DrawManager.ScreenCenter.ToVector2();
+            Add(centerCircleCollider);
+            centerBoxCollider = new BoxCollider(new Point(200, 200));
+            centerBoxCollider.WireFrame = WireFrames.BoxWireFrame(centerBoxCollider.Bounds);
+            centerBoxCollider.Position = DrawManager.ScreenCenter.ToVector2();
+            centerBoxCollider.Center();
+            //Add(centerBoxCollider);
 
             // create the screen size marker
             ScreenSizeMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
