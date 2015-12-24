@@ -6,6 +6,7 @@ using AxisEngine;
 using AxisEngine.AxisDebug;
 using TestBed.Worlds.FirstTest;
 using TestBed.Worlds.SplashScreen;
+using TestBed.Worlds.CameraTestWorld;
 using TestBed.Content;
 
 namespace TestGame
@@ -57,10 +58,12 @@ namespace TestGame
         {
             BodySpriteAnimTestWorld testWorld = new BodySpriteAnimTestWorld(graphics, GraphicsDevice);
             SplashScreen splashScreen = new SplashScreen(graphics, GraphicsDevice);
+            CameraTestWorld cameraTestWorld = new CameraTestWorld(graphics, GraphicsDevice);
 
             _worldManager = new WorldManager(splashScreen);
             _worldManager.ReadyToQuit += QuitEventHandler;
             _worldManager.AddWorld(testWorld);
+            _worldManager.AddWorld(cameraTestWorld);
 
             Grid.Visible = true;
             WireFrames.GraphicsDevice = GraphicsDevice;

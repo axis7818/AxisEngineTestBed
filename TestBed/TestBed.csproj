@@ -51,6 +51,8 @@
     <Compile Include="TestObjects\InputMoveTestObject.cs" />
     <Compile Include="TestObjects\InstructionText.cs" />
     <Compile Include="TestObjects\SmileyWalkDude.cs" />
+    <Compile Include="Worlds\CameraTestWorld\CameraTestWorld.cs" />
+    <Compile Include="Worlds\CameraTestWorld\Layers\PlayerLayer.cs" />
     <Compile Include="Worlds\FirstTest\BodySpriteAnimTestWorld.cs" />
     <Compile Include="Worlds\FirstTest\Layers\MainLayer.cs" />
     <Compile Include="Worlds\SplashScreen\Layers\LogoLayer.cs" />

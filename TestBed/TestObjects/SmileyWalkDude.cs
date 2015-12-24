@@ -35,6 +35,7 @@ namespace TestBed.TestObjects
             Animation walking = new Animation(_smileyWalkTexture, 300, 4, 4, 16, true);
             anim = new Animator(standing);
             anim.AddAnimation(AnimationNames.WALKING, walking);
+            anim.DrawOrder = 5;
             AddComponent(anim);
 
             // make the body

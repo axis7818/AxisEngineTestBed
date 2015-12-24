@@ -45,12 +45,12 @@ namespace TestBed.Worlds.FirstTest
         {
             mainLayer.OuterBounds.Exited -= HandleWorldEnd;
             mainLayer = null;
-            Layers.Clear();
         }
 
         private void HandleWorldEnd(object sender, EventArgs args)
         {
-            Quit();
+            //Quit();
+            End(WorldNames.CAMERA_TEST_WORLD);
         }
     }
 }

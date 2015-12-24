@@ -10,5 +10,6 @@ namespace TestBed.Worlds
     {
         public const string BODY_SPRITE_ANIM_TEST_WORLD = "BodySpriteAnimTestWorld";
         public const string SPLASH_SCREEN = "SplashScreen";
+        public const string CAMERA_TEST_WORLD = "CameraTestWorld";
     }
 }

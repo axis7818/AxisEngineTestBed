@@ -14,5 +14,6 @@ namespace TestBed.Content
         public const string ITEM_GLIMER = @"images\ItemGlimer";
         public const string SMILEY_WALK = @"images\SmileyWalk";
         public const string TEST_SPRITEFONT = @"fonts\testFont";
+        public const string TOP_DOWN_FIELD = @"images\TopDownField";
     }
 }
