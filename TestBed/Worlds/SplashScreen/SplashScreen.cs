@@ -45,6 +45,11 @@ namespace TestBed.Worlds.SplashScreen
             _logoLayer = null;
         }
 
+        protected override void UpdateThis(GameTime t)
+        {
+            
+        }
+
         private void HandleWorldEnd(object sender, EventArgs args)
         {
             End(WorldNames.BODY_SPRITE_ANIM_TEST_WORLD);

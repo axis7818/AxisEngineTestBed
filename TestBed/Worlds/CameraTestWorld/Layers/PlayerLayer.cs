@@ -31,6 +31,11 @@ namespace TestBed.Worlds.CameraTestWorld.Layers
             Add(player);
         }
 
+        public SmileyWalkDude Player
+        {
+            get { return player; }
+        }
+
         protected override void UpdateThis(GameTime t)
         {
             

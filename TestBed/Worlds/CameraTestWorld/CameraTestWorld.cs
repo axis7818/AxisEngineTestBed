@@ -43,6 +43,11 @@ namespace TestBed.Worlds.CameraTestWorld
             playerLayer = null;
         }
 
+        protected override void UpdateThis(GameTime t)
+        {
+            ActiveCamera.Position = playerLayer.Player.Position;
+        }
+
         private struct ManagerNames
         {
             public const string COLLISION_MANAGER = "CollisionManager";

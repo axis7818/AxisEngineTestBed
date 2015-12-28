@@ -47,6 +47,11 @@ namespace TestBed.Worlds.FirstTest
             mainLayer = null;
         }
 
+        protected override void UpdateThis(GameTime t)
+        {
+            
+        }
+
         private void HandleWorldEnd(object sender, EventArgs args)
         {
             //Quit();
