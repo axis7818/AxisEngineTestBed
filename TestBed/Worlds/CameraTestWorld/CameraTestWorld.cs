@@ -45,7 +45,7 @@ namespace TestBed.Worlds.CameraTestWorld
 
         protected override void UpdateThis(GameTime t)
         {
-            ActiveCamera.Position = playerLayer.Player.Position;
+            
         }
 
         private struct ManagerNames

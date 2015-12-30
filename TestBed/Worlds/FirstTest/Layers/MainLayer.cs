@@ -33,7 +33,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             : base(collisionMgr, drawMgr, timeMgr, worldObjects)
         {
             SetUpWorldObjects();
-            drawMgr.DrawWireFrames(collisionMgr);
+            drawMgr.EnableDrawWireFrames(collisionMgr);
         }
 
         public Corral OuterBounds
@@ -53,18 +53,18 @@ namespace TestBed.Worlds.FirstTest.Layers
             CenterMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
             CenterMarker.Center();
             CenterMarker.Scale = new Vector2(0.1f, 0.1f);
-            CenterMarker.Position = DrawManager.ScreenCenter.ToVector2();
+            CenterMarker.Position = new Vector2(1920 / 2, 1080 / 2);
             CenterMarker.Color = Color.Red;
             Add(CenterMarker);
 
             // create the center colliders
             centerCircleCollider = new CircleCollider(100);
             centerCircleCollider.WireFrame = WireFrames.CircleWireFrame(centerCircleCollider.Bounds);
-            centerCircleCollider.Position = DrawManager.ScreenCenter.ToVector2();
+            centerCircleCollider.Position = new Vector2(1920 / 2, 1080 / 2);
             Add(centerCircleCollider);
             centerBoxCollider = new BoxCollider(new Point(200, 200));
             centerBoxCollider.WireFrame = WireFrames.BoxWireFrame(centerBoxCollider.Bounds);
-            centerBoxCollider.Position = DrawManager.ScreenCenter.ToVector2();
+            centerBoxCollider.Position = new Vector2(1920 / 2, 1080 / 2);
             centerBoxCollider.Center();
             //Add(centerBoxCollider);
 
@@ -72,13 +72,13 @@ namespace TestBed.Worlds.FirstTest.Layers
             ScreenSizeMarker = new Sprite(ContentLoader.Content.Load<Texture2D>("ItemGlimer"));
             ScreenSizeMarker.Center();
             ScreenSizeMarker.Scale = new Vector2(0.1f, 0.1f);
-            ScreenSizeMarker.Position = DrawManager.ScreenSize.ToVector2();
+            ScreenSizeMarker.Position = new Vector2(1920, 1080);
             ScreenSizeMarker.Color = Color.Red;
             Add(ScreenSizeMarker);
 
             // create smiley
             smiley = new SmileyWalkDude();
-            smiley.Position = DrawManager.ScreenCenter.ToVector2() / 2;
+            smiley.Position = new Vector2(1920 / 4, 1080 / 4);
             Add(smiley);
 
             // create the instruction text
@@ -88,7 +88,7 @@ namespace TestBed.Worlds.FirstTest.Layers
             Add(instructions);
 
             // create the outerBounds
-            Point size = new Point(DrawManager.ScreenSize.X - 10, DrawManager.ScreenSize.Y - 10);
+            Point size = new Point(1920 - 10, 1080 - 10);
             outerBounds = new Corral(size, smiley);
             outerBounds.Position = new Vector2(5, 5);
             Add(outerBounds);
