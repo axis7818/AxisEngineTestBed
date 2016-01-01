@@ -57,6 +57,11 @@ namespace TestBed.TestObjects
             AddComponent(input);
         }
 
+        public Vector2 CenterPosition
+        {
+            get { return new Vector2(Position.X + anim.Width / 2, Position.Y + anim.Height / 2); }
+        }
+
         public void Walk(Vector2 direction)
         {
             if(direction.LengthSquared() > 0)

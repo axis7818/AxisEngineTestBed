@@ -18,6 +18,11 @@ namespace TestBed.Worlds.CameraTestWorld
     class CameraTestWorld : World
     {
         PlayerLayer playerLayer;
+        
+        Camera[,] splitScreenGrid;
+        private int splitScreenRows = 3;
+        private int splitScreenColumns = 3;
+        private int borderWidth = 10;
 
         public CameraTestWorld(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice) 
             : base(WorldNames.CAMERA_TEST_WORLD, graphics, graphicsDevice)
@@ -29,6 +34,8 @@ namespace TestBed.Worlds.CameraTestWorld
         {
             playerLayer = new PlayerLayer(CollisionManagers[ManagerNames.COLLISION_MANAGER], DrawManagers[ManagerNames.DRAW_MANAGER], TimeManagers[ManagerNames.TIME_MANAGER]);
             AddLayer(playerLayer);
+            
+            splitScreenGrid = this.SetSplitScreenGrid(splitScreenRows, splitScreenColumns, borderWidth);
         }
 
         protected override void SetUpManagers(GraphicsDevice graphicsDevice)
@@ -45,7 +52,10 @@ namespace TestBed.Worlds.CameraTestWorld
 
         protected override void UpdateThis(GameTime t)
         {
-            DefaultCamera.Position = playerLayer.Player.Position;
+            foreach(Camera c in splitScreenGrid)
+            {
+                c.Position = playerLayer.Player.CenterPosition;
+            }
         }
 
         private struct ManagerNames
