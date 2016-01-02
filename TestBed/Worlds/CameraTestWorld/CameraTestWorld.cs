@@ -36,6 +36,10 @@ namespace TestBed.Worlds.CameraTestWorld
             AddLayer(playerLayer);
             
             splitScreenGrid = this.SetSplitScreenGrid(splitScreenRows, splitScreenColumns, borderWidth);
+
+            Lakitu camera11 = new Lakitu(splitScreenGrid[1, 1]);
+            camera11.ZoomCamera(1, 0.5f, 3000);
+            playerLayer.Add(camera11);
         }
 
         protected override void SetUpManagers(GraphicsDevice graphicsDevice)

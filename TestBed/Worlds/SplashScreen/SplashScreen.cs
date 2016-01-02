@@ -12,6 +12,8 @@ namespace TestBed.Worlds.SplashScreen
     {
         private LogoLayer _logoLayer;
 
+        private Lakitu cameraMan;
+
         public SplashScreen(GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
             : base(WorldNames.SPLASH_SCREEN, graphics, graphicsDevice)
         {
@@ -32,6 +34,10 @@ namespace TestBed.Worlds.SplashScreen
                                       TimeManagers[ManagerNames.TIME_MGR]);
             _logoLayer.Billboard.Finished += HandleWorldEnd;
             AddLayer(_logoLayer);
+
+            cameraMan = new Lakitu(DefaultCamera);
+            _logoLayer.Add(cameraMan);
+            cameraMan.PanCamera(Vector2.Zero, new Vector2(1920 / 2, 1080 / 2), 2000);
         }
 
         protected override void Load()
@@ -43,6 +49,8 @@ namespace TestBed.Worlds.SplashScreen
         {
             _logoLayer.Billboard.Finished -= HandleWorldEnd;
             _logoLayer = null;
+
+            cameraMan = null;
         }
 
         protected override void UpdateThis(GameTime t)
